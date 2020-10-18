@@ -2,8 +2,8 @@ package com.love2code;
 
 public interface Coach {
 
-    String getDailyWorkout();
+	public String getDailyWorkout();
 
-    String getDailyFortune();
-
+	public String getDailyFortune();
+	
 }

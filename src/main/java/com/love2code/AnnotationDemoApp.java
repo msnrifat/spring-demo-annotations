@@ -4,13 +4,25 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class AnnotationDemoApp {
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 
-        ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext("/applicationContext.xml");
-        Coach coach = context.getBean("tennisCoach", Coach.class);
-        System.out.println("coach.getDailyWorkout() = " + coach.getDailyWorkout());
-        System.out.println("coach.getDailyFortune() = " + coach.getDailyFortune());
+		// read spring config file
+		ClassPathXmlApplicationContext context = 
+				new ClassPathXmlApplicationContext("applicationContext.xml");
+		
+		// get the bean from spring container
+		Coach theCoach = context.getBean("tennisCoach", Coach.class);
+		
+		// call a method on the bean
+		System.out.println(theCoach.getDailyWorkout());
 
-        context.close();
-    }
+		// call method to get daily fortune
+		System.out.println(theCoach.getDailyFortune());
+				
+		// close the context
+		context.close();	
+	}
+
 }
+
+

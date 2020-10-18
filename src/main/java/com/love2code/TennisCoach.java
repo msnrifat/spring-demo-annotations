@@ -1,36 +1,57 @@
 package com.love2code;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 @Component
 public class TennisCoach implements Coach {
 
-    @Autowired
-    private FortuneService fortuneService;
+	@Autowired
+	@Qualifier("randomFortuneService")
+	private FortuneService fortuneService;
+	
+	// define a default constructor
+	public TennisCoach() {
+		System.out.println(">> TennisCoach: inside default constructor");
+	}
 
-    /*@Autowired
-    public TennisCoach(FortuneService fortuneService) {
-        this.fortuneService = fortuneService;
-    }*/
+	// define my init method
+//	@PostConstruct
+	public void doMyStartupStuff() {
+		System.out.println(">> TennisCoach: inside of doMyStartupStuff()");
+	}
+	
+	// define my destroy method
+//	@PreDestroy
+	public void doMyCleanupStuff() {
+		System.out.println(">> TennisCoach: inside of doMyCleanupStuff()");		
+	}
+	
+	// define a setter method
+	/*
+	@Autowired
+	public void setFortuneService(FortuneService theFortuneService) {
+		System.out.println(">> TennisCoach: inside setFortuneService() method");
+		this.fortuneService = theFortuneService;
+	}
+	*/
+	
+	/*
+	@Autowired
+	public TennisCoach(FortuneService theFortuneService) {
+		fortuneService = theFortuneService;
+	}
+	*/
+	
+	@Override
+	public String getDailyWorkout() {
+		return "Practice your backhand volley";
+	}
 
-    public TennisCoach() {
-        System.out.println("default constructor");
-    }
+	@Override
+	public String getDailyFortune() {
+		return fortuneService.getFortune();
+	}
 
-    /*@Autowired
-    public void doSomeCrazyStuff(FortuneService fortuneService) {
-        this.fortuneService = fortuneService;
-        System.out.println("doSomeCrazyStuff is called");
-    }*/
-
-    @Override
-    public String getDailyWorkout() {
-        return "Playing some Tennis";
-    }
-
-    @Override
-    public String getDailyFortune() {
-        return fortuneService.getFortune();
-    }
 }
