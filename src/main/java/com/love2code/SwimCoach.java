@@ -6,10 +6,10 @@ public class SwimCoach implements Coach {
 
     private FortuneService fortuneService;
 
-    @Value("${foo.email}")
+    @Value("${email}")
     private String email;
 
-    @Value("${foo.team}")
+    @Value("${team}")
     private String team;
 
     public SwimCoach(FortuneService theFortuneService) {
